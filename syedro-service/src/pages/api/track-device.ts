@@ -1,3 +1,5 @@
+export const prerender = false; // 👈 Ye line sabse upar add karein (Bahut Zaroori hai)
+
 import type { APIRoute } from 'astro';
 
 const WEBHOOK = 'https://script.google.com/macros/s/AKfycbyFBUjNWku0RbHD28ySUnd6A5GY7Rspmo4Dez_kF67MjxYd3gR0d2uLR_8bij-6mA/exec';
