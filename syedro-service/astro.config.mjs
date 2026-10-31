@@ -3,13 +3,13 @@ import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   site: 'https://roservicesupport.co.in',
-  output: 'hybrid', // 👈 Isse pages static banenge (fast load honge)
+  output: 'static', // 👈 'hybrid' hata kar 'static' kar dein
   adapter: vercel(),
-  compressHTML: true, // 👈 HTML ko compress karega (fast)
+  compressHTML: true,
   build: { 
-    inlineStylesheets: 'auto' // 👈 CSS ko inline karega (render blocking hatayega)
+    inlineStylesheets: 'auto' 
   },
   devToolbar: { 
-    enabled: false // 👈 Live me toolbar nahi dikhega
+    enabled: false 
   }
 });
