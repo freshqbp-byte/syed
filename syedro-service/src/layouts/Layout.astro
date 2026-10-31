@@ -1,0 +1,180 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const PHONE_DISPLAY = "+91 7090170092";
+const PHONE_LINK = "tel:+917090170092";
+const BUSINESS_NAME = " RO Service";
+---
+
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b5ed7" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://example.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <!-- ⭐ GOOGLE TAG (BASE CODE) - Yahan Nayi ID Daali Hai -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10934329019"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-10934329019');
+    </script>
+
+    <!-- ⭐ DEVICE GUARD TRACKING SCRIPT (Fake clicks block karne ke liye) -->
+    <script is:inline>
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          (function() {
+            var MY_FINGERPRINTS = []; // Apne device ka fingerprint yahan daalo test ke baad
+            
+            var savedBlockStatus = localStorage.getItem('wm_device_blocked');
+            if (savedBlockStatus === 'true') {
+              window.WM_BLOCKED = true;
+            } else {
+              window.WM_BLOCKED = false;
+            }
+
+            function getFingerprint() {
+              try {
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+                ctx.textBaseline = 'top'; ctx.font = '14px Arial';
+                ctx.fillText('Device Guard', 2, 2);
+                var canvasData = canvas.toDataURL().slice(-50);
+                
+                var gl = document.createElement('canvas').getContext('webgl');
+                var webglInfo = '';
+                if (gl) {
+                  var dbg = gl.getExtension('WEBGL_debug_renderer_info');
+                  if (dbg) webglInfo = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || '';
+                }
+                
+                var fpData = [
+                  navigator.userAgent, navigator.language, 
+                  screen.width + 'x' + screen.height + 'x' + screen.colorDepth,
+                  new Date().getTimezoneOffset(), navigator.hardwareConcurrency || 0, 
+                  canvasData, webglInfo
+                ].join('|');
+
+                var hash = 0;
+                for (var i = 0; i < fpData.length; i++) {
+                  hash = ((hash << 5) - hash) + fpData.charCodeAt(i);
+                  hash = hash & hash; 
+                }
+                return 'fp_' + Math.abs(hash).toString(36);
+                
+              } catch(e) { 
+                return 'fp_' + Math.random().toString(36).substring(2, 14); 
+              }
+            }
+
+            var fp = getFingerprint();
+            document.cookie = 'fp=' + fp + '; max-age=' + (30 * 24 * 60 * 60) + '; path=/';
+
+            if (MY_FINGERPRINTS.indexOf(fp) !== -1) return;
+
+            var params = new URLSearchParams(window.location.search);
+            var gclid = params.get('gclid') || params.get('gbraid') || params.get('wbraid');
+
+            if (gclid) {
+              var key = 'wm_clicks_' + fp;
+              var clicks = parseInt(localStorage.getItem(key) || '0') + 1;
+              localStorage.setItem(key, clicks);
+
+              fetch('/api/track-device', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  fp: fp, clicks: clicks, gclid: gclid,
+                  url: window.location.href, ua: navigator.userAgent
+                })
+              })
+              .then(function(res) { return res.json(); })
+              .then(function(data) {
+                if (data.blocked === true) { 
+                  window.WM_BLOCKED = true; 
+                  localStorage.setItem('wm_device_blocked', 'true'); 
+                }
+              })
+              .catch(function() {});
+            }
+          })();
+        }, 1500); 
+      });
+    </script>
+
+    <!-- ⭐ UNIVERSAL CONVERSION BLOCK + CALL TRACKING -->
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.body.addEventListener('click', function(e) {
+          var target = e.target.closest('a');
+          
+          if (target) {
+            var href = target.getAttribute('href') || '';
+            
+            // Check agar Call, WhatsApp ya Email link hai
+            if (href.startsWith('tel:') || href.includes('wa.me') || href.includes('whatsapp') || href.startsWith('mailto:')) {
+              
+              // Agar user blocked hai, toh rok do
+              if (window.WM_BLOCKED === true) {
+                e.preventDefault();
+                e.stopPropagation();
+                alert('Access Restricted');
+                return false;
+              }
+              
+              // Agar Call link hai aur user blocked nahi hai, toh Conversion fire karo
+              if (href.startsWith('tel:')) {
+                if (typeof gtag === 'function') {
+                  gtag('event', 'conversion', {
+                    'send_to': 'AW-10934329019/YAHAN_CALL_LABEL_DAALO', // ⚠️ Naye account ka Call Label yahan daalo
+                    'value': 1.0,
+                    'currency': 'INR'
+                  });
+                }
+              }
+            }
+          }
+        }, true);
+      });
+    </script>
+
+    <!-- LocalBusiness Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": BUSINESS_NAME,
+      "image": "https://example.com/logo.png",
+      "telephone": PHONE_LINK.replace("tel:", ""),
+      "priceRange": "₹₹",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Main Market Road",
+        "addressLocality": "Your City",
+        "addressRegion": "State",
+        "postalCode": "000000",
+        "addressCountry": "IN"
+      },
+      "areaServed": "Your City",
+      "openingHours": "Mo-Su 08:00-21:00",
+      "url": "https://example.com/"
+    })} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
