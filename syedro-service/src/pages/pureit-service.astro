@@ -11,19 +11,19 @@ import Footer from '../components/Footer.astro';
   
   <BrandHeader brandName="Pureit" brandColor="#002855" />
 
-  <!-- 1. HERO SECTION (Fast Loading with local Image) -->
+  <!-- 1. HERO SECTION (Fast & Optimized) -->
   <section class="hero-section">
     
-    <!-- 👇 Kent wali same image yahan lagadi hai 👇 -->
+    <!-- Optimized Image Tag for Fast Loading -->
     <img 
-      src="/hero-bg.webp" 
+      src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?q=75&w=800&auto=format&fit=crop" 
       alt="Pureit RO Service" 
       class="hero-img" 
       fetchpriority="high" 
       loading="eager" 
       decoding="sync" 
-      width="1200" 
-      height="800"
+      width="800" 
+      height="600"
     />
     
     <!-- Dark Navy Blue Overlay -->
@@ -41,11 +41,13 @@ import Footer from '../components/Footer.astro';
           Avoid local repairs and fake parts. Get <strong>official-grade Pureit RO Service</strong> with years of experience. 100% genuine parts & <strong>90-Day Warranty</strong>. Book now!
         </p>
 
+        <!-- Exact Buttons from Screenshot -->
         <div class="official-buttons">
           <a href="#book-service" class="btn-amc">Get AMC</a>
           <a href="#book-service" class="btn-express">Book Same-Day Service</a>
         </div>
 
+        <!-- Exact Badge from Screenshot -->
         <div class="brand-badge-wrapper">
           <div class="brand-top">PUREIT</div>
           <div class="brand-middle">SERVICE</div>
@@ -53,7 +55,7 @@ import Footer from '../components/Footer.astro';
         </div>
       </div>
 
-      <!-- FORM -->
+      <!-- FORM (Strict Validation) -->
       <div class="hero-form" id="book-service">
         <h2 style="color: #002855;">Book Pureit Service</h2>
         <p class="form-subtext">Fill the form below & get a call within 10 minutes.</p>
@@ -232,7 +234,7 @@ import Footer from '../components/Footer.astro';
   .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
   h1, h2, h3, p, a, span, input, textarea, button { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
   
-  /* ===== 1. HERO SECTION (Fast Loading with Image) ===== */
+  /* ===== 1. HERO SECTION (Optimized) ===== */
   .hero-section { 
     position: relative; 
     padding: 30px 15px 60px; 
@@ -254,23 +256,25 @@ import Footer from '../components/Footer.astro';
   .hero-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 40, 85, 0.75); 
+    background: rgba(0, 30, 65, 0.85); 
     z-index: 2;
   }
   
   .hero-content { position: relative; z-index: 3; display: flex; flex-direction: column; gap: 30px; max-width: 1000px; width: 100%; }
   .hero-text { text-align: center; }
   
-  .hero-title-main { font-size: 1.9rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; text-shadow: 0 3px 6px rgba(0,0,0,0.8); }
-  .hero-subtext { font-size: 1.05rem; line-height: 1.6; color: #f8fafc; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-  .hero-subtext strong { color: #00AEEF; font-weight: 800; text-shadow: 0 2px 4px rgba(0,0,0,0.8); } 
+  .hero-title-main { font-size: 1.9rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+  .hero-subtext { font-size: 1.05rem; line-height: 1.6; color: #f8fafc; margin-bottom: 10px; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+  
+  /* 👇 Text Highlights (Exact White as per screenshot) 👇 */
+  .hero-subtext strong { color: #ffffff; font-weight: 800; } 
 
-  /* Official Buttons */
+  /* Exact Buttons from Screenshot */
   .official-buttons { display: flex; flex-direction: column; gap: 12px; max-width: 280px; margin: 0 auto 25px; }
-  .btn-amc { background: #1a1a1a; color: white; padding: 10px 15px; border-radius: 6px; font-size: 0.95rem; font-weight: 700; text-decoration: none; display: block; }
+  .btn-amc { background: transparent; border: 1px solid #00AEEF; color: white; padding: 10px 15px; border-radius: 6px; font-size: 0.95rem; font-weight: 700; text-decoration: none; display: block; }
   .btn-express { background: #ffffff; color: #002855; padding: 10px 15px; border-radius: 6px; font-size: 0.95rem; font-weight: 700; text-decoration: none; display: block; }
 
-  /* Premium Badge */
+  /* Exact Badge from Screenshot */
   .brand-badge-wrapper { 
     display: inline-flex; flex-direction: column; align-items: center; 
     width: 160px; border-radius: 4px; overflow: hidden; 
@@ -278,7 +282,7 @@ import Footer from '../components/Footer.astro';
   }
   .brand-top { background-color: #002855; color: #ffffff; font-weight: 900; font-size: 1.1rem; width: 100%; text-align: center; padding: 5px 0; }
   .brand-middle { background-color: #ffffff; color: #002855; font-size: 0.85rem; font-weight: 800; width: 100%; text-align: center; padding: 4px 0; }
-  .brand-bottom { background-color: #002855; color: #00AEEF; font-size: 0.65rem; font-weight: 800; width: 100%; text-align: center; padding: 5px 0; }
+  .brand-bottom { background-color: #00AEEF; color: #ffffff; font-size: 0.65rem; font-weight: 800; width: 100%; text-align: center; padding: 5px 0; }
 
   /* Form */
   .hero-form { background: #fff; padding: 25px 20px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); width: 100%; display: flex; flex-direction: column; align-items: center; }
