@@ -18,28 +18,23 @@ const BUSINESS_NAME = " RO Service";
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://example.com/" />
+    <link rel="canonical" href="https://roservicesupport.co.in/" />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
 
-    <!-- ⭐ GOOGLE TAG (BASE CODE) - Yahan Nayi ID Daali Hai -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10934329019"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-10934329019');
-    </script>
+    <!-- Preconnect for faster Google Tag load later -->
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
     <!-- ⭐ DEVICE GUARD TRACKING SCRIPT (Fake clicks block karne ke liye) -->
     <script is:inline>
       window.addEventListener('load', function() {
         setTimeout(function() {
           (function() {
-            var MY_FINGERPRINTS = []; // Apne device ka fingerprint yahan daalo test ke baad
+            var MY_FINGERPRINTS = []; 
             
             var savedBlockStatus = localStorage.getItem('wm_device_blocked');
             if (savedBlockStatus === 'true') {
@@ -126,10 +121,8 @@ const BUSINESS_NAME = " RO Service";
           if (target) {
             var href = target.getAttribute('href') || '';
             
-            // Check agar Call, WhatsApp ya Email link hai
             if (href.startsWith('tel:') || href.includes('wa.me') || href.includes('whatsapp') || href.startsWith('mailto:')) {
               
-              // Agar user blocked hai, toh rok do
               if (window.WM_BLOCKED === true) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -137,11 +130,10 @@ const BUSINESS_NAME = " RO Service";
                 return false;
               }
               
-              // Agar Call link hai aur user blocked nahi hai, toh Conversion fire karo
               if (href.startsWith('tel:')) {
                 if (typeof gtag === 'function') {
                   gtag('event', 'conversion', {
-                    'send_to': 'AW-10934329019/YAHAN_CALL_LABEL_DAALO', // ⚠️ Naye account ka Call Label yahan daalo
+                    'send_to': 'AW-10934329019/YAHAN_CALL_LABEL_DAALO',
                     'value': 1.0,
                     'currency': 'INR'
                   });
@@ -158,23 +150,42 @@ const BUSINESS_NAME = " RO Service";
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": BUSINESS_NAME,
-      "image": "https://example.com/logo.png",
+      "image": "https://roservicesupport.co.in/logo.png",
       "telephone": PHONE_LINK.replace("tel:", ""),
       "priceRange": "₹₹",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Main Market Road",
-        "addressLocality": "Your City",
-        "addressRegion": "State",
-        "postalCode": "000000",
+        "addressLocality": "Bangalore",
+        "addressRegion": "Karnataka",
+        "postalCode": "560001",
         "addressCountry": "IN"
       },
-      "areaServed": "Your City",
-      "openingHours": "Mo-Su 08:00-21:00",
-      "url": "https://example.com/"
+      "areaServed": "Bangalore",
+      "openingHours": "Mo-Su 00:00-23:59",
+      "url": "https://roservicesupport.co.in/"
     })} />
   </head>
   <body>
     <slot />
+
+    <!-- ⭐ GOOGLE TAG (Lazy Loaded) - Ye initial load ko block nahi karega ⭐ -->
+    <script is:inline>
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          // Load GTM Script
+          var script = document.createElement('script');
+          script.src = "https://www.googletagmanager.com/gtag/js?id=AW-10934329019";
+          script.async = true;
+          document.head.appendChild(script);
+
+          // Init GTM
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-10934329019');
+        }, 2000); // Page load hone ke 2 second baad GTM load hoga
+      });
+    </script>
   </body>
 </html>
