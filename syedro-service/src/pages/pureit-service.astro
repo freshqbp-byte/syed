@@ -9,14 +9,22 @@ import Footer from '../components/Footer.astro';
   description="Looking for Pureit RO service near you? Pureit (now by A.O. Smith) started in 2004. Get 100% genuine Pureit water purifier repair, installation & AMC at your doorstep. Call +91 7090170092."
 >
   
-  <!-- Header with Pureit Dark Navy Blue -->
   <BrandHeader brandName="Pureit" brandColor="#002855" />
 
-  <!-- 1. HERO SECTION -->
+  <!-- 1. HERO SECTION (Fast Loading with local Image) -->
   <section class="hero-section">
     
-    <!-- Background Image -->
-    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1548839140-29a749e1cf4d?q=80&w=1920&auto=format&fit=crop');"></div>
+    <!-- 👇 Kent wali same image yahan lagadi hai 👇 -->
+    <img 
+      src="/hero-bg.webp" 
+      alt="Pureit RO Service" 
+      class="hero-img" 
+      fetchpriority="high" 
+      loading="eager" 
+      decoding="sync" 
+      width="1200" 
+      height="800"
+    />
     
     <!-- Dark Navy Blue Overlay -->
     <div class="hero-overlay"></div>
@@ -33,19 +41,16 @@ import Footer from '../components/Footer.astro';
           Avoid local repairs and fake parts. Get <strong>official-grade Pureit RO Service</strong> with years of experience. 100% genuine parts & <strong>90-Day Warranty</strong>. Book now!
         </p>
 
-        <!-- Action Buttons -->
         <div class="official-buttons">
           <a href="#book-service" class="btn-amc">Get AMC</a>
           <a href="#book-service" class="btn-express">Book Same-Day Service</a>
         </div>
 
-        <!-- Premium Badge -->
         <div class="brand-badge-wrapper">
           <div class="brand-top">PUREIT</div>
           <div class="brand-middle">SERVICE</div>
           <div class="brand-bottom">SINCE 2004</div>
         </div>
-
       </div>
 
       <!-- FORM -->
@@ -62,21 +67,18 @@ import Footer from '../components/Footer.astro';
             <input type="text" name="name" placeholder="Your Name" required />
           </div>
           
-          <!-- 👇 Number Only: Mobile (Max 10 Digits) 👇 -->
           <div class="form-group">
             <input type="tel" name="mobile" placeholder="Mobile No (10 Digits)" 
                    maxlength="10" pattern="[0-9]{10}" title="Please enter exactly 10 digits" 
                    inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
           </div>
 
-          <!-- 👇 Number Only: Pincode (Max 6 Digits) 👇 -->
           <div class="form-group">
             <input type="text" name="pincode" placeholder="Pin Code (6 Digits)" 
                    maxlength="6" pattern="[0-9]{6}" title="Please enter exactly 6 digits" 
                    inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
           </div>
 
-          <!-- 👇 Naya Address Field 👇 -->
           <div class="form-group">
             <textarea name="address" placeholder="Full Address (House No, Area)" rows="2" required></textarea>
           </div>
@@ -226,65 +228,93 @@ import Footer from '../components/Footer.astro';
 </Layout>
 
 <style>
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
   h1, h2, h3, p, a, span, input, textarea, button { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
   
-  /* ===== 1. HERO SECTION ===== */
-  .hero-section { position: relative; padding: 10px 15px 40px; color: #fff; display: flex; justify-content: center; overflow: hidden; }
-  .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: 1; }
-  .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0, 40, 85, 0.9), rgba(0, 30, 65, 0.95)); z-index: 2; }
+  /* ===== 1. HERO SECTION (Fast Loading with Image) ===== */
+  .hero-section { 
+    position: relative; 
+    padding: 30px 15px 60px; 
+    color: #fff; 
+    display: flex; 
+    justify-content: center; 
+    overflow: hidden;
+  }
+  
+  .hero-img {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+  }
+
+  /* Dark Navy Blue Overlay */
+  .hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 40, 85, 0.75); 
+    z-index: 2;
+  }
   
   .hero-content { position: relative; z-index: 3; display: flex; flex-direction: column; gap: 30px; max-width: 1000px; width: 100%; }
   .hero-text { text-align: center; }
-  .hero-title-main { font-size: 1.9rem; font-weight: 800; margin-top: 0; margin-bottom: 20px; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-  .hero-subtext { font-size: 1.05rem; line-height: 1.5; color: #e2e8f0; margin-bottom: 10px; }
-  .hero-subtext strong { color: #ffffff; font-weight: 800; text-shadow: 0 1px 2px rgba(0,0,0,0.5); } 
+  
+  .hero-title-main { font-size: 1.9rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; text-shadow: 0 3px 6px rgba(0,0,0,0.8); }
+  .hero-subtext { font-size: 1.05rem; line-height: 1.6; color: #f8fafc; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+  .hero-subtext strong { color: #00AEEF; font-weight: 800; text-shadow: 0 2px 4px rgba(0,0,0,0.8); } 
 
+  /* Official Buttons */
   .official-buttons { display: flex; flex-direction: column; gap: 12px; max-width: 280px; margin: 0 auto 25px; }
-  .btn-amc { background: #002855; color: white; padding: 10px 15px; border-radius: 6px; font-size: 0.95rem; font-weight: 700; text-decoration: none; display: block; border: 1px solid #00AEEF; }
+  .btn-amc { background: #1a1a1a; color: white; padding: 10px 15px; border-radius: 6px; font-size: 0.95rem; font-weight: 700; text-decoration: none; display: block; }
   .btn-express { background: #ffffff; color: #002855; padding: 10px 15px; border-radius: 6px; font-size: 0.95rem; font-weight: 700; text-decoration: none; display: block; }
 
-  .brand-badge-wrapper { display: inline-flex; flex-direction: column; align-items: center; width: 160px; border-radius: 8px; overflow: hidden; box-shadow: 0 6px 20px rgba(0, 174, 239, 0.3); border: 2px solid #00AEEF; background: #ffffff; }
-  .brand-top { background-color: #002855; color: #ffffff; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; width: 100%; text-align: center; padding: 6px 0; }
-  .brand-middle { background-color: #ffffff; color: #002855; font-size: 0.85rem; font-weight: 800; letter-spacing: 2px; width: 100%; text-align: center; padding: 4px 0; }
-  .brand-bottom { background-color: #00AEEF; color: #ffffff; font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; width: 100%; text-align: center; padding: 5px 0; }
+  /* Premium Badge */
+  .brand-badge-wrapper { 
+    display: inline-flex; flex-direction: column; align-items: center; 
+    width: 160px; border-radius: 4px; overflow: hidden; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6); background: #fff; 
+  }
+  .brand-top { background-color: #002855; color: #ffffff; font-weight: 900; font-size: 1.1rem; width: 100%; text-align: center; padding: 5px 0; }
+  .brand-middle { background-color: #ffffff; color: #002855; font-size: 0.85rem; font-weight: 800; width: 100%; text-align: center; padding: 4px 0; }
+  .brand-bottom { background-color: #002855; color: #00AEEF; font-size: 0.65rem; font-weight: 800; width: 100%; text-align: center; padding: 5px 0; }
 
-  .hero-form { background: #fff; padding: 25px 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); width: 100%; display: flex; flex-direction: column; align-items: center; }
+  /* Form */
+  .hero-form { background: #fff; padding: 25px 20px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); width: 100%; display: flex; flex-direction: column; align-items: center; }
   .hero-form form { width: 100%; }
-  .hero-form h2 { text-align: center; margin-bottom: 5px; font-size: 1.4rem; font-weight: 800; margin-top: 0; }
+  .hero-form h2 { text-align: center; margin-bottom: 5px; font-size: 1.4rem; font-weight: 800; }
   .form-subtext { text-align: center; color: #059669; font-size: 0.9rem; font-weight: 600; margin-bottom: 20px; background: #ecfdf5; padding: 6px 10px; border-radius: 6px; display: inline-block; width: 100%; }
   
-  /* Form Inputs */
   .form-group { margin-bottom: 12px; }
   .form-group input, .form-group textarea { width: 100%; padding: 14px 15px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; outline: none; background: #f8fafc; }
   .form-group input:focus, .form-group textarea:focus { border-color: #002855; background: #fff; }
-  .btn-submit { width: 100%; color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 5px; }
+  .btn-submit { width: 100%; color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
 
   /* ===== 2. TRUST SECTION ===== */
   .trust-section { display: flex; flex-direction: column; gap: 15px; max-width: 900px; margin: -30px auto 40px; padding: 0 15px; position: relative; z-index: 4; }
   .trust-box { border-radius: 12px; padding: 25px 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
   .green-box { color: white; }
-  .green-box h2 { font-size: 1.5rem; margin-bottom: 8px; font-weight: 800; margin-top: 0; }
+  .green-box h2 { font-size: 1.5rem; margin-bottom: 8px; font-weight: 800; }
   .green-box p { font-size: 0.95rem; margin-bottom: 15px; }
   .trust-phone { display: block; font-size: 1.8rem; font-weight: 800; color: white; text-decoration: none; margin-bottom: 20px; }
   .btn-white { background: white; padding: 12px 30px; border-radius: 25px; font-weight: bold; text-decoration: none; display: inline-block; }
   .white-box { background: white; display: flex; flex-direction: column; gap: 20px; }
   .stat { text-align: center; }
   .stat strong { font-size: 1.8rem; color: #334155; display: block; font-weight: 800; }
-  .stat p { color: #64748b; font-size: 0.9rem; margin-top: 5px; margin-bottom: 0; }
+  .stat p { color: #64748b; font-size: 0.9rem; margin-top: 5px; }
   .star { font-size: 1.5rem; vertical-align: middle; }
 
   /* ===== 3. KEYWORD SEO SECTION ===== */
   .keyword-seo-section { padding: 50px 15px; background: #f8fafc; }
   .seo-grid { display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 900px; margin: 0 auto; }
   .seo-card { background: white; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; }
-  .seo-card h3 { font-size: 1.1rem; margin-bottom: 10px; margin-top: 0; font-weight: 700; }
-  .seo-card p { color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0; text-align: justify; }
+  .seo-card h3 { font-size: 1.1rem; margin-bottom: 10px; font-weight: 700; }
+  .seo-card p { color: #475569; font-size: 0.95rem; line-height: 1.6; text-align: justify; }
 
   /* ===== 4. SERVICES SECTION ===== */
   .services-section { padding: 50px 15px; background: white; }
-  .services-list { list-style: none; padding: 0; max-width: 800px; margin: 0 auto; }
+  .services-list { list-style: none; max-width: 800px; margin: 0 auto; }
   .services-list li { background: white; padding: 20px; margin-bottom: 15px; border-radius: 8px; border-left: 4px solid; box-shadow: 0 2px 8px rgba(0,0,0,0.04); color: #334155; line-height: 1.6; font-size: 0.95rem; }
   .services-list strong { font-size: 1.05rem; display: block; margin-bottom: 5px; }
 
@@ -293,7 +323,7 @@ import Footer from '../components/Footer.astro';
   .steps-container { display: flex; flex-direction: column; gap: 25px; max-width: 700px; margin: 0 auto; }
   .step { display: flex; gap: 15px; align-items: flex-start; }
   .step-icon { font-size: 1.5rem; background: #e2e8f0; padding: 12px; border-radius: 50%; line-height: 1; flex-shrink: 0; }
-  .step-text h3 { color: #1e293b; margin-bottom: 5px; margin-top: 0; font-size: 1.1rem; }
+  .step-text h3 { color: #1e293b; margin-bottom: 5px; font-size: 1.1rem; }
   .step-text p { color: #64748b; line-height: 1.5; font-size: 0.95rem; }
 
   /* ===== 6. WHY CHOOSE US ===== */
@@ -301,7 +331,7 @@ import Footer from '../components/Footer.astro';
   .cards-grid { display: grid; grid-template-columns: 1fr; gap: 15px; max-width: 1000px; margin: 0 auto; }
   .card { background: #f8fafc; padding: 25px 20px; border-radius: 12px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
   .card-icon { font-size: 2.5rem; margin-bottom: 15px; }
-  .card h3 { margin-bottom: 10px; margin-top: 0; font-size: 1.2rem; font-weight: 800; }
+  .card h3 { margin-bottom: 10px; font-size: 1.2rem; font-weight: 800; }
   .card p { color: #64748b; font-size: 0.95rem; line-height: 1.6; }
 
   /* ===== 7. SEO CONTENT ===== */
@@ -320,14 +350,15 @@ import Footer from '../components/Footer.astro';
   /* ===== 9. FLOATING BUTTON ===== */
   .floating-call-btn { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); color: white; padding: 12px 25px; border-radius: 50px; font-weight: 800; font-size: 1rem; text-decoration: none; z-index: 9999; display: flex; align-items: center; justify-content: center; gap: 8px; width: 80%; max-width: 300px; }
 
+  .section-title { color: #002855; font-size: 1.5rem; margin-bottom: 25px; text-align: center; font-weight: 800; line-height: 1.3; }
+
   /* ===== DESKTOP MEDIA QUERY ===== */
   @media (min-width: 768px) {
-    .hero-section { padding: 50px 20px; }
+    .hero-section { padding: 60px 20px; }
     .hero-content { flex-direction: row; align-items: center; justify-content: space-between; }
     .hero-text { text-align: left; flex: 1; padding-right: 30px; }
     .hero-title-main { font-size: 2.6rem; }
     .hero-subtext { font-size: 1.15rem; }
-    .official-buttons { margin: 0 0 30px 0; }
     .hero-form { max-width: 400px; margin-bottom: 0; }
     .section-title { font-size: 1.8rem; }
     .trust-section { flex-direction: row; gap: 20px; margin-top: -40px; }
