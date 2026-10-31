@@ -3,11 +3,11 @@ import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   site: 'https://roservicesupport.co.in',
-  output: 'static', // 👈 'hybrid' hata kar 'static' kar dein
+  output: 'static', 
   adapter: vercel(),
   compressHTML: true,
   build: { 
-    inlineStylesheets: 'auto' 
+    inlineStylesheets: 'always' // 👈 CSS ko inline kar diya (Render-blocking fix)
   },
   devToolbar: { 
     enabled: false 
